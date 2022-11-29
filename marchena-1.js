@@ -1,43 +1,57 @@
-/*
- TODO Entrega numero 1
-*/
+class ProductManager {
 
-/*
- ? Creación de clase 
-*/
+    constructor(){
+    this.productos = []
+    }
 
-const readline = require('readline').createInterface({
-    input: process.stdin,
-    output: process.stdout
-  });
+    getProductosId = () =>{
+        const cant = this.productos.length
+        const productoId = (amount > 0) ? this.productos[amount - 1].id + 1 : 1;
+        return productoId
+    }
 
+    getProducts = () =>{
+        return this.productos
+    }
 
-const ProductManager = class {
+    getProductosById = (productoId) => {
+        const productoEncontrado = this.productos.
+        find (e => e.id == productoId)
 
-    constructor(title, description, price, thumbnail, code, stock){
+        if(productoEncontrado) {
+            console.log("El producto es: ", productoEncontrado.title)
+        } else {
+            console.log("No encontrado")
+        }
+    }
 
-        
-        this.title = title,
-        this.description = description,
-        this.price = price,
-        this.thumbnail = thumbnail,
-        this.code = code,
-        this.stoc = stock
+    addProduct = (title, description, price, thumbnail, code, stock) =>{
+        const producto = {
+        title, 
+        description, 
+        price, 
+        thumbnail, 
+        code, 
+        stock
         }
 
+        const duplicatedCode = (e) => e.code == producto.code
+        if(!this.productos.some(duplicatedCode)){
+            this.productos.push(producto)
+        } else {
+            console.log("Un codigo duplicado")
+        }
+    }   
 }
 
-readline.question('Nuevo producto', producto => {
-    const producto =[]
-    producto.push = new ProductManager()
-    console.log(`Hey there ${name}!`);
-    readline.close();
-  });
+const producto = new ProductManager()
 
-const prueba = new ProductManager('a', 'b', 'c', 'd', 'e', 'f');
+console.log("First call ", producto.getProducts())
 
+producto.addProduct('Libro Uno','The first book',10,'image','ASD-001',6)
+producto.addProduct('Libro Dos','The second book',10,'image','ASD-002',6)
+producto.addProduct('Libro Tres','The thirth book',10,'image','ASD-003',6)
+producto.addProduct('Libro Cuatro','The fourth book',10,'image','ASD-004',6)
+producto.addProduct('Libro Cinco','The fifth book',10,'image','ASD-004',6)
 
-
-
-
-
+producto.getProductosId
